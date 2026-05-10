@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>I2IT Student Portal</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- jQuery Mobile CDN -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <style>
+
+        body{
+            font-family: Arial, sans-serif;
+            background:linear-gradient(to bottom,#dfe9f3,#ffffff);
+        }
+
+        .banner{
+            text-align:center;
+            padding:25px;
+            background:linear-gradient(135deg,#0d47a1,#1976d2);
+            color:white;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .banner h1{
+            margin:0;
+            font-size:28px;
+        }
+
+        .course-card{
+            background:linear-gradient(135deg,#ffffff,#eef4ff);
+            padding:15px;
+            margin:10px;
+            border-radius:12px;
+            border-left:6px solid #1976d2;
+            box-shadow:0 4px 10px rgba(0,0,0,0.15);
+            transition:0.3s;
+        }
+
+        .course-card:hover{
+            transform:scale(1.02);
+        }
+
+        .footer-text{
+            text-align:center;
+            font-size:14px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<!-- HOME PAGE -->
+<div data-role="page" id="home">
+
+    <div data-role="header" data-theme="b">
+        <h1>I2IT Mobile Portal</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+
+        <div class="banner">
+            <h1>I2IT Academic Portal</h1>
+            <p>Mobile Website using jQuery Mobile</p>
+        </div>
+
+        <ul data-role="listview" data-inset="true">
+            <li><a href="#about">About College</a></li>
+            <li><a href="#courses">Courses</a></li>
+            <li><a href="#faculty">Faculty</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+
+    </div>
+
+    <div data-role="footer" data-theme="b">
+        <h4 class="footer-text">I2IT Student Portal</h4>
+    </div>
+
+</div>
+
+<!-- ABOUT PAGE -->
+<div data-role="page" id="about">
+
+    <div data-role="header" data-theme="b">
+        <a href="#home" data-icon="back">Back</a>
+        <h1>About College</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+
+        <h2>International Institute of Information Technology</h2>
+
+        <p>
+            I2IT is a premier institute providing quality education in Information Technology,
+            Computer Engineering and emerging technologies.
+        </p>
+
+        <div style="background:#e9ecef; padding:25px; border-radius:10px; text-align:center; font-size:20px; font-weight:bold;">
+            Welcome to I2IT Campus
+        </div>
+
+    </div>
+
+    <div data-role="footer" data-theme="b">
+        <h4>About Page</h4>
+    </div>
+
+</div>
+
+<!-- COURSES PAGE -->
+<div data-role="page" id="courses">
+
+    <div data-role="header" data-theme="b">
+        <a href="#home" data-icon="back">Back</a>
+        <h1>Courses</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+
+        <div class="course-card">
+            <h3>Information Technology</h3>
+            <p>Focuses on software development, networking and databases.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>Computer Engineering</h3>
+            <p>Includes programming, AI, cloud computing and cybersecurity.</p>
+        </div>
+
+        <div class="course-card">
+            <h3>Electronics and Telecommunication Engineering</h3>
+            <p>Focuses on communication systems, embedded systems and digital electronics.</p>
+        </div>
+
+    </div>
+
+    <div data-role="footer" data-theme="b">
+        <h4>Courses Offered</h4>
+    </div>
+
+</div>
+
+<!-- FACULTY PAGE -->
+<div data-role="page" id="faculty">
+
+    <div data-role="header" data-theme="b">
+        <a href="#home" data-icon="back">Back</a>
+        <h1>Faculty</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+
+        <ul data-role="listview" data-inset="true">
+            <li>
+                <h2>Dr. Sharma</h2>
+                <p>Head of IT Department</p>
+            </li>
+
+            <li>
+                <h2>Prof. Mehta</h2>
+                <p>Cloud Computing Expert</p>
+            </li>
+
+            <li>
+                <h2>Prof. Kulkarni</h2>
+                <p>Cyber Security Specialist</p>
+            </li>
+        </ul>
+
+    </div>
+
+    <div data-role="footer" data-theme="b">
+        <h4>Faculty Information</h4>
+    </div>
+
+</div>
+
+<!-- CONTACT PAGE -->
+<div data-role="page" id="contact">
+
+    <div data-role="header" data-theme="b">
+        <a href="#home" data-icon="back">Back</a>
+        <h1>Contact</h1>
+    </div>
+
+    <div role="main" class="ui-content">
+
+        <form>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter Name">
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Enter Email">
+
+            <label for="message">Message:</label>
+            <textarea id="message"></textarea>
+
+            <button class="ui-btn ui-btn-b">Submit</button>
+
+        </form>
+
+    </div>
+
+    <div data-role="footer" data-theme="b">
+        <h4>Contact Us</h4>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+```
+
+---
+
+# How to Run
+
+## Step 1
+
+Install VS Code.
+
+---
+
+## Step 2
+
+Create folder:
+
+```
+MobileWebsite
+```
+
+---
+
+## Step 3
+
+Create file:
+
+```
+index.html
+```
+
+---
+
+## Step 4
+
+Paste the complete code.
+
+---
+
+## Step 5
+
+Right click `index.html`
+
+Choose:
+
+```text
+Open with Live Server
+```
+
+OR directly double click the file.
+
+---
+
+# Features Used
+
+* jQuery Mobile framework
+* Mobile responsive layout
+* Multiple pages
+* Navigation menu
+* ListView
+* Forms
+* Buttons
+* Headers and Footers
+* Mobile UI components
+
+---
+
+# Important Viva Questions
+
+## What is jQuery Mobile?
+
+jQuery Mobile is a touch-optimized framework used to create responsive mobile web applications.
+
+---
+
+## What are advantages of jQuery Mobile?
+
+* Responsive design
+* Cross-platform support
+* Easy UI development
+* Touch-friendly components
+
+---
+
+## What is data-role in jQuery Mobile?
+
+`data-role` defines UI components like page, header, footer and button.
+
+Example:
+
+```html
+<div data-role="page">
+```
+
+---
+
+## What is ListView?
+
+ListView displays mobile-friendly lists.
+
+---
+
+## What is responsive web design?
+
+Responsive design automatically adjusts layout according to screen size.
+
+---
+
+## Difference between Website and Mobile Website?
+
+| Website          | Mobile Website   |
+| ---------------- | ---------------- |
+| Desktop oriented | Mobile optimized |
+| Large layout     | Touch friendly   |
+| Fixed width      | Responsive       |
+
+---
+
+# Another Example Website Idea
+
+## Online Food Ordering Mobile Website
+
+Features:
+
+* Home page
+* Food menu
+* Cart section
+* Contact page
+* Order form
+
+You can create pages like:
+
+```html
+<div data-role="page" id="menu">
+```
+
+Menu items:
+
+* Pizza
+* Burger
+* Pasta
+* Cold Drinks
+
+Use:
+
+* `data-role="listview"`
+* `data-role="button"`
+* `data-role="panel"`
+* Forms for placing orders
+
+---
+
+## Other Good Practical Website Ideas
+
+1. Hospital Management Mobile Website
+2. Hotel Booking Mobile Website
+3. Library Management Mobile Website
+4. Online Shopping Mobile Website
+5. Banking Mobile Website
+6. Event Management Mobile Website
+7. Gym/Fitness Mobile Website
+8. Travel & Tourism Mobile Website
+9. Student Attendance Mobile Website
+10. Restaurant Mobile Website
+
+---
+
+# Conclusion
+
+Successfully created a responsive mobile website using jQuery Mobile framework.
+
+jQuery Mobile Practical Viva Questions with Answers
+1. What is jQuery Mobile?
+jQuery Mobile is a touch-optimized web framework used to create responsive mobile websites and web applications using HTML, CSS and JavaScript.
+
+2. What is responsive web design?
+Responsive web design means a website automatically adjusts its layout according to different screen sizes like mobile, tablet and desktop.
+
+3. What is the purpose of jQuery?
+jQuery is a JavaScript library used to simplify DOM manipulation, animations, event handling and AJAX operations.
+
+4. What is the difference between jQuery and jQuery Mobile?
+jQuery	jQuery Mobile
+JavaScript library	Mobile UI framework
+Handles DOM and events	Creates mobile interfaces
+Used for scripting	Used for responsive mobile websites
+5. What is data-role in jQuery Mobile?
+data-role is a special attribute used to define jQuery Mobile UI components like page, header, footer, button and listview.
+
+Example:
+
+<div data-role="page">
+6. What is data-role="page"?
+It defines a mobile page container in jQuery Mobile.
+
+7. What is data-role="header"?
+It creates the top navigation/header section of the mobile page.
+
+8. What is data-role="footer"?
+It creates the bottom footer section of the mobile page.
+
+9. What is data-role="listview"?
+It creates a mobile-optimized styled list used for menus and navigation.
+
+10. What is data-theme?
+data-theme applies predefined jQuery Mobile color themes.
+
+Example:
+
+data-theme="b"
+11. What is the use of viewport meta tag?
+It makes the website responsive on mobile devices.
+
+Example:
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+12. Why do we use CDN links?
+CDN links are used to load external libraries like jQuery and jQuery Mobile from online servers.
+
+13. What is a CDN?
+CDN stands for Content Delivery Network.
+It delivers files quickly from distributed servers.
+
+14. Why is jQuery Mobile called touch optimized?
+Because it is specially designed for touch devices like smartphones and tablets.
+
+15. What is the purpose of CSS in this practical?
+CSS is used for styling the webpage such as colors, spacing, gradients, fonts and layout.
+
+16. What is border-radius in CSS?
+It is used to create rounded corners.
+
+Example:
+
+border-radius:10px;
+17. What is box-shadow?
+It adds shadow effects around elements.
+
+Example:
+
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+18. What is a gradient in CSS?
+A gradient is a smooth transition between multiple colors.
+
+Example:
+
+background:linear-gradient(to bottom,#dfe9f3,#ffffff);
+19. What is hover effect?
+Hover effect changes the appearance of an element when mouse pointer moves over it.
+
+Example:
+
+transform:scale(1.02);
+20. What is the use of forms in the website?
+Forms are used to collect user input like name, email and feedback.
+
+21. What is <input type="email">?
+It is an input field specifically designed for email addresses with basic validation.
+
+22. What is <textarea>?
+It is used for multiline text input.
+
+23. What is the purpose of navigation links?
+Navigation links help users move between different pages of the website.
+
+24. How does navigation work in jQuery Mobile?
+Navigation works using page IDs.
+
+Example:
+
+<a href="#about">
+It opens:
+
+<div id="about">
+without reloading the page.
+
+25. Why is jQuery Mobile good for mobile websites?
+Because it provides:
+
+responsive UI
+
+touch support
+
+lightweight design
+
+easy navigation
+
+cross-platform compatibility
+
+26. What is mobile-first design?
+Mobile-first design means designing the website primarily for mobile devices before desktop devices.
+
+27. What are the advantages of jQuery Mobile?
+Easy to use
+
+Responsive design
+
+Touch optimized
+
+Cross-platform support
+
+Fast development
+
+Lightweight framework
+
+28. What are the disadvantages of jQuery Mobile?
+Limited advanced UI customization
+
+Slower than native mobile apps
+
+Less modern compared to newer frameworks
+
+29. What is HTML?
+HTML stands for HyperText Markup Language.
+It is used to create webpage structure.
+
+30. What is CSS?
+CSS stands for Cascading Style Sheets.
+It is used for webpage styling and layout.
+
+31. What is JavaScript?
+JavaScript is a scripting language used to make webpages interactive.
+
+32. What is a framework?
+A framework is a collection of pre-written code used to simplify development.
+
+33. What is the purpose of <head> tag?
+It contains metadata, title, CSS links and script files.
+
+34. What is the purpose of <body> tag?
+It contains all visible webpage content.
+
+35. Why did we use multiple pages in one HTML file?
+jQuery Mobile supports multiple pages inside one HTML file using:
+
+<div data-role="page">
+36. What is the purpose of ui-content class?
+It provides proper spacing and mobile-friendly layout.
+
+37. What is the purpose of ui-btn class?
+It converts normal buttons into mobile styled buttons.
+
+38. What is the purpose of ui-btn-b?
+It applies theme B styling to buttons.
+
+39. What is the purpose of listview inset?
+data-inset="true" creates rounded and padded list appearance.
+
+40. What is the output of this practical?
+A responsive multi-page mobile website for I2IT Academic Portal created using jQuery Mobile.
