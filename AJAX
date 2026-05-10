@@ -1,0 +1,416 @@
+1.register.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>User Registration</title>
+
+  <!-- Bootstrap -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- jQuery -->
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+  <style>
+
+    body{
+      background:#eef2f7;
+      font-family:Arial,sans-serif;
+    }
+
+    .container-box{
+      width:450px;
+      margin:60px auto;
+      background:white;
+      padding:35px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      text-align:center;
+      margin-bottom:25px;
+      color:#0d6efd;
+      font-weight:bold;
+    }
+
+    button{
+      width:100%;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container-box">
+
+    <h2>User Registration</h2>
+
+    <form id="registerForm">
+
+      <div class="mb-3">
+
+        <label class="form-label">Full Name</label>
+
+        <input type="text" id="name" class="form-control" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">Email Address</label>
+
+        <input type="email" id="email" class="form-control" required>
+
+      </div>
+
+      <div class="mb-3">
+
+        <label class="form-label">Mobile Number</label>
+
+        <input type="text" id="mobile" class="form-control" required>
+
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+
+        Register User
+
+      </button>
+
+    </form>
+
+  </div>
+
+<script>
+
+$(document).ready(function(){
+
+  $("#registerForm").submit(function(event){
+
+    event.preventDefault();
+
+    let userData = {
+
+      name: $("#name").val(),
+      email: $("#email").val(),
+      mobile: $("#mobile").val()
+
+    };
+
+    // Get old users
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // Add new user
+
+    users.push(userData);
+
+    // Save to localStorage
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Registration Successful");
+
+    // Redirect to display page
+
+    window.location.href = "display.html";
+
+  });
+
+});
+
+</script>
+
+</body>
+</html>
+
+2.display.html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Registered Users</title>
+
+  <!-- Bootstrap -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+
+    body{
+      background:#f4f6f9;
+      font-family:Arial,sans-serif;
+    }
+
+    .table-box{
+      width:90%;
+      margin:50px auto;
+      background:white;
+      padding:30px;
+      border-radius:15px;
+      box-shadow:0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2{
+      text-align:center;
+      margin-bottom:25px;
+      color:#198754;
+      font-weight:bold;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <div class="table-box">
+
+    <h2>Registered User List</h2>
+
+    <table class="table table-bordered table-hover text-center">
+
+      <thead class="table-dark">
+
+        <tr>
+
+          <th>Name</th>
+          <th>Email</th>
+          <th>Mobile</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="userTable">
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+<script>
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+let table = document.getElementById("userTable");
+
+users.forEach(function(user){
+
+  let row = `
+
+    <tr>
+
+      <td>${user.name}</td>
+      <td>${user.email}</td>
+      <td>${user.mobile}</td>
+
+    </tr>
+
+  `;
+
+  table.innerHTML += row;
+
+});
+
+</script>
+
+</body>
+</html>
+
+PRACTICAL:
+Write a JavaScript Program to get the user registration data and push to
+array/local storage with AJAX POST method and data list in new page
+and display the output on the Vagrant Machine (Ubuntu 22.04)
+
+========================================================
+STEP 1: CREATE VAGRANT PROJECT
+========================================================
+
+Open Command Prompt in Windows:
+
+cd Desktop
+mkdir ajax-practical
+cd ajax-practical
+vagrant init ubuntu/jammy64
+
+========================================================
+STEP 2: START UBUNTU MACHINE
+========================================================
+
+vagrant up
+
+========================================================
+STEP 3: LOGIN INTO UBUNTU
+========================================================
+
+vagrant ssh
+
+========================================================
+STEP 4: INSTALL APACHE WEB SERVER
+========================================================
+
+sudo apt update
+sudo apt install apache2 -y
+
+sudo systemctl start apache2
+sudo systemctl enable apache2
+
+========================================================
+STEP 5: GO TO WEB SERVER DIRECTORY
+========================================================
+
+cd /var/www/html
+
+Remove default file:
+
+sudo rm index.html
+
+========================================================
+STEP 6: CREATE HTML FILES
+========================================================
+
+Create first file:
+
+sudo nano index.html
+
+Paste registration form code.
+
+Save file:
+CTRL + X
+Y
+ENTER
+
+--------------------------------------------------------
+
+Create second file:
+
+sudo nano display.html
+
+Paste registered users table code.
+
+Save file:
+CTRL + X
+Y
+ENTER
+
+========================================================
+STEP 7: GET UBUNTU IP ADDRESS
+========================================================
+
+ip a
+
+Find IP address like:
+
+192.168.x.x
+
+========================================================
+STEP 8: OPEN WEBSITE
+========================================================
+
+Open browser in Windows:
+
+http://YOUR-IP/index.html
+
+Example:
+
+http://192.168.56.10/index.html
+
+========================================================
+OUTPUT
+========================================================
+
+1. Registration form opens
+2. Enter Name, Email, Mobile
+3. Click Register User
+4. Data stored in localStorage
+5. Redirects to display.html
+6. Registered user details displayed in table
+
+========================================================
+IMPORTANT CONCEPTS
+========================================================
+
+AJAX:
+AJAX = Asynchronous JavaScript And XML
+Used to send data without refreshing webpage.
+
+Used here:
+$.ajax()
+
+--------------------------------------------------------
+
+LOCAL STORAGE:
+Stores data permanently inside browser.
+
+Store data:
+localStorage.setItem()
+
+Get data:
+localStorage.getItem()
+
+--------------------------------------------------------
+
+JSON:
+JSON converts object into string format.
+
+Convert object to string:
+JSON.stringify()
+
+Convert string to object:
+JSON.parse()
+
+========================================================
+VIVA QUESTIONS WITH ANSWERS
+========================================================
+
+1. What is AJAX?
+AJAX allows data transfer without refreshing webpage.
+
+2. What is jQuery?
+jQuery is a JavaScript library used for easier DOM manipulation and AJAX.
+
+3. What is Local Storage?
+Local Storage stores data permanently inside browser.
+
+4. Difference between Session Storage and Local Storage?
+
+Local Storage:
+Permanent storage
+
+Session Storage:
+Temporary storage
+
+5. What is Bootstrap?
+Bootstrap is a CSS framework used for responsive web design.
+
+6. What does preventDefault() do?
+Stops form from reloading webpage.
+
+7. What is JSON.stringify()?
+Converts object into string.
+
+8. What is JSON.parse()?
+Converts string back into object.
+
+9. Why use event.preventDefault()?
+To stop automatic form submission.
+
+10. What is DOM?
+DOM = Document Object Model.
+Used to access HTML elements using JavaScript.
