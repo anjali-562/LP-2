@@ -1,0 +1,458 @@
+# ==========================================
+
+# SALESFORCE PROPERTY TENANT OBJECT + DASHBOARD + REPORT CREATION
+
+# SPPU TE IT LP-2 / CLOUD COMPUTING PRACTICAL
+
+# ==========================================
+
+# ==========================================
+
+# AIM
+
+# ==========================================
+
+Create custom objects in Salesforce for Property and Tenant management.
+Create tabs, app, records, report, and dashboard.
+
+# ==========================================
+
+# PART 1 : LOGIN TO SALESFORCE
+
+# ==========================================
+
+STEP 1:
+Open browser
+
+STEP 2:
+Open:
+[https://login.salesforce.com](https://login.salesforce.com)
+
+STEP 3:
+Login using Salesforce credentials
+
+# ==========================================
+
+# PART 2 : CREATE PROPERTY OBJECT
+
+# ==========================================
+
+STEP 1:
+Click Setup (Gear Icon)
+
+STEP 2:
+Search:
+Object Manager
+
+STEP 3:
+Click:
+Create -> Custom Object
+
+STEP 4:
+Fill details:
+
+Label:
+Property
+
+Plural Label:
+Properties
+
+Object Name:
+Property
+
+Record Name:
+Property Name
+
+Data Type:
+Text
+
+STEP 5:
+Enable:
+✔ Allow Reports
+✔ Allow Activities
+✔ Track Field History
+
+STEP 6:
+Click Save
+
+# ==========================================
+
+# PART 3 : CREATE FIELDS FOR PROPERTY OBJECT
+
+# ==========================================
+
+Create following fields:
+
+1. Property Type
+   Type: Picklist
+   Values:
+   Apartment
+   House
+   Office
+   Shop
+
+2. Rent Amount
+   Type: Currency
+
+3. Address
+   Type: Text Area
+
+4. Availability
+   Type: Checkbox
+
+5. Owner Name
+   Type: Text
+
+# ==========================================
+
+# PART 4 : CREATE TENANT OBJECT
+
+# ==========================================
+
+STEP 1:
+Object Manager -> Create -> Custom Object
+
+STEP 2:
+Fill details:
+
+Label:
+Tenant
+
+Plural Label:
+Tenants
+
+Object Name:
+Tenant
+
+Record Name:
+Tenant Name
+
+Data Type:
+Text
+
+STEP 3:
+Enable:
+✔ Allow Reports
+✔ Allow Activities
+
+STEP 4:
+Click Save
+
+# ==========================================
+
+# PART 5 : CREATE FIELDS FOR TENANT OBJECT
+
+# ==========================================
+
+Create following fields:
+
+1. Mobile Number
+   Type: Phone
+
+2. Email
+   Type: Email
+
+3. Occupation
+   Type: Text
+
+4. Rent Paid
+   Type: Currency
+
+5. Property
+   Type: Lookup Relationship
+   Related Object: Property
+
+# ==========================================
+
+# PART 6 : CREATE TABS
+
+# ==========================================
+
+STEP 1:
+Go to Setup
+
+STEP 2:
+Search:
+Tabs
+
+STEP 3:
+Click:
+New Custom Object Tab
+
+STEP 4:
+Create tab for:
+
+1. Property
+2. Tenant
+
+Choose any tab style
+
+Click Next -> Save
+
+# ==========================================
+
+# PART 7 : CREATE SALESFORCE APP
+
+# ==========================================
+
+STEP 1:
+Go to Setup
+
+STEP 2:
+Search:
+App Manager
+
+STEP 3:
+Click:
+New Lightning App
+
+STEP 4:
+App Name:
+Property Management System
+
+STEP 5:
+Click Next until Navigation Items
+
+STEP 6:
+Add:
+✔ Property
+✔ Tenant
+
+STEP 7:
+Save and Finish
+
+# ==========================================
+
+# PART 8 : CREATE PROPERTY RECORDS
+
+# ==========================================
+
+STEP 1:
+Open App Launcher
+
+STEP 2:
+Open:
+Property Management System
+
+STEP 3:
+Open Property Tab
+
+STEP 4:
+Click New
+
+Add sample records:
+
+Record 1:
+Property Name: Green Residency
+Property Type: Apartment
+Rent Amount: 25000
+Address: Pune
+Availability: True
+Owner Name: Amit Shah
+
+Record 2:
+Property Name: Blue Heights
+Property Type: Office
+Rent Amount: 50000
+Address: Mumbai
+Availability: True
+Owner Name: Raj Mehta
+
+# ==========================================
+
+# PART 9 : CREATE TENANT RECORDS
+
+# ==========================================
+
+STEP 1:
+Open Tenant Tab
+
+STEP 2:
+Click New
+
+Record 1:
+Tenant Name: Rahul Patil
+Mobile Number: 9876543210
+Email: [rahul@gmail.com](mailto:rahul@gmail.com)
+Occupation: Engineer
+Rent Paid: 25000
+Property: Green Residency
+
+Record 2:
+Tenant Name: Sneha Joshi
+Mobile Number: 9876501234
+Email: [sneha@gmail.com](mailto:sneha@gmail.com)
+Occupation: Manager
+Rent Paid: 50000
+Property: Blue Heights
+
+# ==========================================
+
+# PART 10 : CREATE REPORT
+
+# ==========================================
+
+STEP 1:
+Click App Launcher
+
+STEP 2:
+Open:
+Reports
+
+STEP 3:
+Click:
+New Report
+
+STEP 4:
+Select:
+Tenants
+
+STEP 5:
+Click Start Report
+
+STEP 6:
+Add columns:
+✔ Tenant Name
+✔ Mobile Number
+✔ Occupation
+✔ Rent Paid
+✔ Property
+
+STEP 7:
+Click Save & Run
+
+Report Name:
+Tenant Rent Report
+
+# ==========================================
+
+# PART 11 : CREATE DASHBOARD
+
+# ==========================================
+
+STEP 1:
+Open:
+Dashboards
+
+STEP 2:
+Click:
+New Dashboard
+
+Dashboard Name:
+Property Dashboard
+
+STEP 3:
+Click Create
+
+STEP 4:
+Click + Component
+
+STEP 5:
+Select Report:
+Tenant Rent Report
+
+STEP 6:
+Choose Chart Type:
+Bar Chart / Pie Chart
+
+STEP 7:
+Click Add -> Save -> Done
+
+# ==========================================
+
+# OUTPUT
+
+# ==========================================
+
+Successfully created:
+✔ Property Object
+✔ Tenant Object
+✔ Tabs
+✔ Lightning App
+✔ Records
+✔ Report
+✔ Dashboard
+
+# ==========================================
+
+# VIVA QUESTIONS WITH ANSWERS
+
+# ==========================================
+
+1. What is Salesforce?
+   Salesforce is a cloud-based CRM platform used to manage customers, applications, and business processes.
+
+2. What is CRM?
+   CRM stands for Customer Relationship Management.
+   It is used to manage customer data and interactions.
+
+3. What is a custom object?
+   A custom object is a user-created database table in Salesforce.
+
+4. Difference between standard object and custom object?
+   Standard objects are prebuilt by Salesforce.
+   Custom objects are created by users.
+
+5. What is Object Manager?
+   Object Manager is used to create and manage objects, fields, and relationships.
+
+6. What is a field in Salesforce?
+   A field stores individual data values inside an object.
+
+7. What is a record?
+   A record is a single row of data in an object.
+
+8. What is Lookup Relationship?
+   Lookup relationship connects two objects.
+
+9. Why is Lookup used in Tenant object?
+   To connect Tenant with Property object.
+
+10. What is a tab?
+    A tab provides access to object records in Salesforce UI.
+
+11. What is Lightning App?
+    A Lightning App is a collection of tabs and functionalities grouped together.
+
+12. What is a report?
+    A report displays organized data from Salesforce objects.
+
+13. What is a dashboard?
+    A dashboard visually represents report data using charts and graphs.
+
+14. Difference between report and dashboard?
+    Report shows data in tabular form.
+    Dashboard shows graphical visualization.
+
+15. What are components in dashboard?
+    Charts, tables, and graphs used to display report data.
+
+16. What is cloud computing?
+    Cloud computing provides computing resources over the internet.
+
+17. Is Salesforce SaaS, PaaS, or IaaS?
+    Salesforce mainly provides SaaS and PaaS services.
+
+18. What is SaaS?
+    Software provided over internet without installation.
+
+19. What is PaaS?
+    Platform provided for application development and deployment.
+
+20. Advantages of Salesforce?
+    Easy access, cloud storage, automation, scalability, and security.
+
+21. What is App Launcher?
+    App Launcher is used to open Salesforce apps and modules.
+
+22. What is dashboard refresh?
+    Updating dashboard data from latest reports.
+
+23. Why reports are important?
+    Reports help analyze and organize data.
+
+24. What is cloud CRM?
+    CRM software hosted on cloud infrastructure.
+
+25. What is multitenancy in Salesforce?
+    Multiple users share same cloud infrastructure securely.
