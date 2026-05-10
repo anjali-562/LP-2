@@ -1,0 +1,585 @@
+PRACTICAL: CREATE FOUR APIs USING NODE.JS, EXPRESSJS AND MONGODB FOR CRUD OPERATIONS
+
+====================================================================
+AIM
+====================================================================
+
+To create REST APIs using Node.js, Express.js and MongoDB
+for CRUD Operations (Create, Read, Update, Delete).
+
+====================================================================
+SOFTWARE REQUIRED
+====================================================================
+
+1. Node.js
+2. MongoDB
+3. VS Code
+4. Postman
+
+====================================================================
+STEP 1 : INSTALL NODE.JS
+====================================================================
+
+1. Open browser
+2. Open:
+   https://nodejs.org
+3. Download:
+   LTS Version
+4. Install normally
+5. Keep clicking NEXT
+6. Finish installation
+
+====================================================================
+STEP 2 : VERIFY NODE INSTALLATION
+====================================================================
+
+Open Command Prompt and run:
+
+node -v
+
+Example Output:
+
+v22.0.0
+
+Now check npm:
+
+npm -v
+
+npm is Node Package Manager.
+
+====================================================================
+STEP 3 : INSTALL MONGODB
+====================================================================
+
+1. Open:
+   https://www.mongodb.com/try/download/community
+
+2. Download:
+   MongoDB Community Server
+
+3. Install normally
+
+IMPORTANT:
+Tick:
+Install MongoDB Compass
+
+MongoDB Compass is GUI software used to view database.
+
+====================================================================
+STEP 4 : START MONGODB SERVICE
+====================================================================
+
+1. Press:
+   Windows + S
+
+2. Search:
+   Services
+
+3. Open Services
+
+4. Find:
+   MongoDB
+
+5. Click:
+   Start
+
+Now MongoDB server is running.
+
+====================================================================
+STEP 5 : CREATE PROJECT FOLDER
+====================================================================
+
+1. Create folder:
+   crud-api
+
+2. Open folder in VS Code
+
+====================================================================
+STEP 6 : OPEN TERMINAL IN VS CODE
+====================================================================
+
+In VS Code:
+
+Terminal → New Terminal
+
+Terminal opens at bottom.
+
+====================================================================
+STEP 7 : INITIALIZE NODE PROJECT
+====================================================================
+
+Run:
+
+npm init -y
+
+This creates:
+package.json
+
+====================================================================
+STEP 8 : INSTALL REQUIRED PACKAGES
+====================================================================
+
+Run:
+
+npm install express mongoose nodemon
+
+Package Explanation:
+
+1. express
+   Used to create server and APIs.
+
+2. mongoose
+   Used to connect Node.js with MongoDB.
+
+3. nodemon
+   Automatically restarts server after code changes.
+
+====================================================================
+STEP 9 : CREATE server.js FILE
+====================================================================
+
+1. Right click in VS Code Explorer
+2. Click:
+   New File
+3. File Name:
+   server.js
+
+====================================================================
+STEP 10 : WRITE COMPLETE CODE
+====================================================================
+
+Paste inside server.js
+
+--------------------------------------------------------------------
+
+const express = require('express');
+const mongoose = require('mongoose');
+
+const app = express();
+
+app.use(express.json());
+
+mongoose.connect('mongodb://127.0.0.1:27017/studentDB')
+.then(() => console.log("MongoDB Connected"))
+.catch((err) => console.log(err));
+
+const studentSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    course: String
+});
+
+const Student = mongoose.model('Student', studentSchema);
+
+
+// CREATE API
+
+app.post('/students', async (req, res) => {
+
+    try {
+
+        const student = new Student(req.body);
+
+        await student.save();
+
+        res.status(201).json(student);
+
+    } catch (error) {
+
+        res.status(500).json({message: error.message});
+    }
+});
+
+
+// READ API
+
+app.get('/students', async (req, res) => {
+
+    try {
+
+        const students = await Student.find();
+
+        res.json(students);
+
+    } catch (error) {
+
+        res.status(500).json({message: error.message});
+    }
+});
+
+
+// UPDATE API
+
+app.put('/students/:id', async (req, res) => {
+
+    try {
+
+        const updatedStudent = await Student.findByIdAndUpdate(
+            req.params.id,
+            req.body,
+            {new: true}
+        );
+
+        res.json(updatedStudent);
+
+    } catch (error) {
+
+        res.status(500).json({message: error.message});
+    }
+});
+
+
+// DELETE API
+
+app.delete('/students/:id', async (req, res) => {
+
+    try {
+
+        await Student.findByIdAndDelete(req.params.id);
+
+        res.json({message: "Student Deleted Successfully"});
+
+    } catch (error) {
+
+        res.status(500).json({message: error.message});
+    }
+});
+
+
+// SERVER
+
+app.listen(3000, () => {
+
+    console.log("Server Running on Port 3000");
+
+});
+
+--------------------------------------------------------------------
+
+Save File:
+CTRL + S
+
+====================================================================
+STEP 11 : RUN SERVER
+====================================================================
+
+Run:
+
+npx nodemon server.js
+
+OR
+
+node server.js
+
+Output:
+
+MongoDB Connected
+Server Running on Port 3000
+
+IMPORTANT:
+Keep terminal running.
+
+====================================================================
+STEP 12 : INSTALL POSTMAN
+====================================================================
+
+1. Open:
+   https://www.postman.com/downloads/
+
+2. Install Postman
+
+Postman is used to test APIs.
+
+====================================================================
+STEP 13 : TEST CREATE API
+====================================================================
+
+1. Open Postman
+2. Click:
+   New → HTTP Request
+
+3. Select Method:
+   POST
+
+4. URL:
+
+   http://localhost:3000/students
+
+5. Open:
+   Body → raw → JSON
+
+6. Paste:
+
+{
+   "name": "Anjali",
+   "age": 20,
+   "course": "IT"
+}
+
+7. Click:
+   Send
+
+Output:
+Student inserted into MongoDB.
+
+====================================================================
+STEP 14 : TEST READ API
+====================================================================
+
+1. Create new request
+2. Method:
+   GET
+
+3. URL:
+
+   http://localhost:3000/students
+
+4. Click Send
+
+Output:
+Displays all student data.
+
+====================================================================
+STEP 15 : COPY STUDENT ID
+====================================================================
+
+Copy value of:
+
+_id
+
+Example:
+
+681dcf7f5e8f...
+
+This is needed for Update and Delete APIs.
+
+====================================================================
+STEP 16 : TEST UPDATE API
+====================================================================
+
+1. Create new request
+2. Method:
+   PUT
+
+3. URL:
+
+http://localhost:3000/students/STUDENT_ID
+
+Replace STUDENT_ID with actual ID.
+
+4. Body → raw → JSON
+
+Paste:
+
+{
+   "name": "Anjali Gupta",
+   "age": 21,
+   "course": "Computer Engineering"
+}
+
+5. Click Send
+
+Output:
+Updated student data displayed.
+
+====================================================================
+STEP 17 : TEST DELETE API
+====================================================================
+
+1. Create new request
+2. Method:
+   DELETE
+
+3. URL:
+
+http://localhost:3000/students/STUDENT_ID
+
+4. Click Send
+
+Output:
+
+{
+   "message": "Student Deleted Successfully"
+}
+
+====================================================================
+STEP 18 : VERIFY DELETE
+====================================================================
+
+Again run GET API:
+
+http://localhost:3000/students
+
+Deleted student disappears.
+
+====================================================================
+PROJECT STRUCTURE
+====================================================================
+
+crud-api/
+│
+├── node_modules/
+├── package.json
+├── package-lock.json
+└── server.js
+
+====================================================================
+CODE EXPLANATION
+====================================================================
+
+1. express()
+   Creates Express application.
+
+2. express.json()
+   Converts JSON request into JavaScript object.
+
+3. mongoose.connect()
+   Connects Node.js with MongoDB.
+
+4. mongoose.Schema()
+   Defines structure of MongoDB collection.
+
+5. mongoose.model()
+   Creates model for database operations.
+
+6. app.post()
+   Used for CREATE operation.
+
+7. app.get()
+   Used for READ operation.
+
+8. app.put()
+   Used for UPDATE operation.
+
+9. app.delete()
+   Used for DELETE operation.
+
+10. app.listen()
+   Starts server on specific port.
+
+====================================================================
+IMPORTANT COMMANDS
+====================================================================
+
+npm init -y
+Initializes Node project.
+
+npm install express mongoose nodemon
+Installs required packages.
+
+node server.js
+Runs server.
+
+npx nodemon server.js
+Runs server with automatic restart.
+
+====================================================================
+FLOW OF PROJECT
+====================================================================
+
+Postman
+   ↓
+Express Server
+   ↓
+Mongoose
+   ↓
+MongoDB Database
+
+====================================================================
+VIVA QUESTIONS WITH ANSWERS
+====================================================================
+
+Q1. What is Node.js?
+Ans:
+Node.js is JavaScript runtime environment used to run JavaScript outside browser.
+
+Q2. What is Express.js?
+Ans:
+Express.js is web framework used to create APIs and web applications.
+
+Q3. What is MongoDB?
+Ans:
+MongoDB is NoSQL database that stores data in JSON-like documents.
+
+Q4. What is CRUD?
+Ans:
+CRUD means:
+Create, Read, Update and Delete.
+
+Q5. What is REST API?
+Ans:
+REST API allows communication between client and server using HTTP methods.
+
+Q6. Which HTTP method is used for Create?
+Ans:
+POST
+
+Q7. Which HTTP method is used for Read?
+Ans:
+GET
+
+Q8. Which HTTP method is used for Update?
+Ans:
+PUT
+
+Q9. Which HTTP method is used for Delete?
+Ans:
+DELETE
+
+Q10. What is Mongoose?
+Ans:
+Mongoose is ODM library used to connect Node.js with MongoDB.
+
+Q11. What is Schema?
+Ans:
+Schema defines structure of MongoDB collection.
+
+Q12. What is Middleware?
+Ans:
+Middleware processes request before response.
+
+Example:
+express.json()
+
+Q13. What is nodemon?
+Ans:
+nodemon automatically restarts server after code changes.
+
+Q14. What is localhost?
+Ans:
+localhost refers to own computer.
+
+Q15. What is Port 3000?
+Ans:
+Communication endpoint used by server.
+
+Q16. Why is express.json() used?
+Ans:
+To convert JSON request into JavaScript object.
+
+Q17. What is package.json?
+Ans:
+Contains project information and dependencies.
+
+Q18. Difference between SQL and MongoDB?
+
+SQL:
+Table-based relational database.
+
+MongoDB:
+Document-based NoSQL database.
+
+Q19. What is API testing?
+Ans:
+Checking whether API works correctly.
+
+Q20. What is JSON?
+Ans:
+JavaScript Object Notation used for data exchange.
+
+====================================================================
+CONCLUSION
+====================================================================
+
+Successfully created REST APIs using Node.js, Express.js and MongoDB
+for CRUD operations and tested APIs using Postman successfully.
