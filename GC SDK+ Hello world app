@@ -1,0 +1,558 @@
+PRACTICAL: INSTALL GOOGLE APP ENGINE AND CREATE HELLO WORLD APPLICATION USING PYTHON
+
+====================================================================
+AIM
+====================================================================
+
+To install and configure Google App Engine and create a Hello World
+web application using Python Flask.
+
+====================================================================
+REQUIREMENTS
+====================================================================
+
+1. Google Account
+2. Internet Connection
+3. Web Browser
+
+Open:
+https://console.cloud.google.com
+
+====================================================================
+STEP 1 : CREATE GOOGLE CLOUD PROJECT
+====================================================================
+
+1. Open Google Cloud Console
+2. Click:
+   Select Project → NEW PROJECT
+3. Project Name:
+   hello-app
+4. Click CREATE
+
+====================================================================
+STEP 2 : OPEN CLOUD SHELL
+====================================================================
+
+1. Click terminal icon (>_) from top-right corner
+2. Cloud Shell terminal opens
+
+====================================================================
+STEP 3 : CREATE APP ENGINE APPLICATION
+====================================================================
+
+Run command:
+
+gcloud app create
+
+Choose region:
+6
+
+Region Name:
+asia-south1
+
+====================================================================
+STEP 4 : ENABLE REQUIRED APIS
+====================================================================
+
+Run:
+
+gcloud services enable cloudbuild.googleapis.com
+
+Run:
+
+gcloud services enable appengine.googleapis.com
+
+Wait 1–2 minutes.
+
+====================================================================
+STEP 5 : CREATE PROJECT FOLDER
+====================================================================
+
+Run:
+
+mkdir hello-world
+cd hello-world
+
+====================================================================
+STEP 6 : CREATE main.py
+====================================================================
+
+Run:
+
+nano main.py
+
+Paste following code:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Hello World from Google App Engine!"
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)
+
+Save File:
+CTRL + O
+ENTER
+CTRL + X
+
+====================================================================
+STEP 7 : CREATE requirements.txt
+====================================================================
+
+Run:
+
+nano requirements.txt
+
+Paste:
+
+Flask==3.0.0
+gunicorn==21.2.0
+
+Save:
+CTRL + O
+ENTER
+CTRL + X
+
+====================================================================
+STEP 8 : CREATE app.yaml
+====================================================================
+
+Run:
+
+nano app.yaml
+
+Paste:
+
+runtime: python311
+
+entrypoint: gunicorn -b :$PORT main:app
+
+Save:
+CTRL + O
+ENTER
+CTRL + X
+
+====================================================================
+STEP 9 : CHECK FILES
+====================================================================
+
+Run:
+
+ls
+
+Output:
+
+app.yaml
+main.py
+requirements.txt
+
+====================================================================
+STEP 10 : DEPLOY APPLICATION
+====================================================================
+
+Run:
+
+gcloud app deploy
+
+Type:
+
+Y
+
+Wait for deployment to complete.
+
+====================================================================
+STEP 11 : OPEN WEBSITE
+====================================================================
+
+Run:
+
+gcloud app browse
+
+OR manually open:
+
+https://PROJECT-ID.appspot.com
+
+Output:
+
+Hello World from Google App Engine!
+
+====================================================================
+PROJECT STRUCTURE
+====================================================================
+
+hello-world/
+│
+├── main.py
+├── requirements.txt
+└── app.yaml
+
+====================================================================
+CODE EXPLANATION
+====================================================================
+
+1. from flask import Flask
+   Imports Flask web framework.
+
+2. app = Flask(__name__)
+   Creates Flask application object.
+
+3. @app.route('/')
+   Defines homepage URL route.
+
+4. def hello():
+   Function executed when homepage opens.
+
+5. return "Hello World from Google App Engine!"
+   Displays message on webpage.
+
+====================================================================
+IMPORTANT FILES
+====================================================================
+
+1. main.py
+   Contains application code.
+
+2. requirements.txt
+   Contains required Python libraries.
+
+3. app.yaml
+   App Engine configuration file.
+
+====================================================================
+IMPORTANT COMMANDS
+====================================================================
+
+gcloud app create
+Creates App Engine application.
+
+gcloud app deploy
+Deploys application to cloud.
+
+gcloud app browse
+Opens deployed application.
+
+nano filename
+Opens file editor.
+
+ls
+Displays files.
+
+====================================================================
+VIVA QUESTIONS WITH ANSWERS
+====================================================================
+
+Q1. What is Google App Engine?
+Ans:
+Google App Engine is a cloud platform used to develop and host web applications.
+
+Q2. Which cloud model does App Engine use?
+Ans:
+PaaS (Platform as a Service)
+
+Q3. What is Flask?
+Ans:
+Flask is a lightweight Python web framework.
+
+Q4. What is app.yaml?
+Ans:
+Configuration file used by App Engine.
+
+Q5. What is requirements.txt?
+Ans:
+File containing required Python libraries.
+
+Q6. What is deployment?
+Ans:
+Uploading application to cloud server.
+
+Q7. What is Cloud Shell?
+Ans:
+Browser-based Linux terminal provided by Google Cloud.
+
+Q8. What is routing?
+Ans:
+Routing connects URLs with functions.
+
+Example:
+@app.route('/')
+
+Q9. What is gunicorn?
+Ans:
+Gunicorn is a Python WSGI HTTP server.
+
+Q10. What is scalability?
+Ans:
+Ability to handle increasing users automatically.
+
+Q11. What is WSGI?
+Ans:
+Web Server Gateway Interface used between Python web apps and servers.
+
+Q12. Difference between localhost and cloud deployment?
+
+Localhost:
+Runs on own computer.
+
+Cloud Deployment:
+Runs on Google cloud servers.
+
+Q13. Why did deployment error occur earlier?
+Ans:
+Cloud Build API/service account was not enabled.
+
+Q14. What is runtime in app.yaml?
+
+Example:
+runtime: python311
+
+It specifies Python runtime environment.
+
+====================================================================
+CONCLUSION
+====================================================================
+
+Successfully configured Google App Engine, created Python Flask web
+application, deployed application on cloud and accessed hosted website
+
+# ==========================================
+# GOOGLE APP ENGINE HELLO WORLD PRACTICAL
+# SPPU TE IT LP-2 CLOUD COMPUTING
+# ==========================================
+
+
+STEP 1:
+Install Google Cloud SDK from:
+https://cloud.google.com/sdk/docs/install
+
+
+STEP 2:
+Open:
+Google Cloud SDK Shell
+
+
+STEP 3:
+Login to Google Cloud
+
+Command:
+gcloud init
+
+Browser opens:
+-> Login using Google account
+-> Click Allow
+
+
+STEP 4:
+Create New Project
+
+Command:
+gcloud projects create hello-app-anjali-56789
+
+NOTE:
+Project ID must be UNIQUE.
+
+
+STEP 5:
+Set Project
+
+Command:
+gcloud config set project hello-app-anjali-56789
+
+
+STEP 6:
+Enable Billing
+
+Open:
+https://console.cloud.google.com/billing
+
+-> Add Billing Account
+-> Link Billing Account to Project
+
+
+STEP 7:
+Create App Engine Application
+
+Command:
+gcloud app create
+
+Choose Region:
+6
+
+Region:
+asia-south1
+
+
+STEP 8:
+Create Project Folder
+
+Commands:
+mkdir hello-app
+cd hello-app
+
+
+STEP 9:
+Create Python File
+
+Command:
+notepad app.py
+
+
+Paste Code:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Hello World from Google App Engine!"
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080)
+
+
+
+STEP 10:
+Create requirements.txt
+
+Command:
+notepad requirements.txt
+
+
+Paste:
+
+Flask
+gunicorn
+
+
+STEP 11:
+Create app.yaml
+
+Command:
+notepad app.yaml
+
+
+Paste:
+
+runtime: python311
+
+entrypoint: gunicorn -b :$PORT app:app
+
+
+STEP 12:
+Deploy Application
+
+Command:
+gcloud app deploy
+
+Press:
+Y
+
+
+STEP 13:
+Open Website
+
+Command:
+gcloud app browse
+
+
+OUTPUT:
+Hello World from Google App Engine!
+
+
+# ==========================================
+# SIMPLE WEB APPLICATION
+# ==========================================
+
+Edit app.py again:
+
+Command:
+notepad app.py
+
+
+Replace with:
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "<h1>Home Page</h1>"
+
+@app.route('/about')
+def about():
+    return "<h2>About Page</h2>"
+
+@app.route('/contact')
+def contact():
+    return "<h2>Contact Page</h2>"
+
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080)
+
+
+Deploy Again:
+
+gcloud app deploy
+
+
+Open:
+https://PROJECT-ID.appspot.com/about
+
+https://PROJECT-ID.appspot.com/contact
+
+
+
+# ==========================================
+# VIVA QUESTIONS WITH ANSWERS
+# ==========================================
+
+1. What is Google App Engine?
+Google App Engine is a Platform as a Service (PaaS) provided by Google Cloud.
+
+2. What is PaaS?
+PaaS provides platform and environment for developing and deploying applications.
+
+3. What is Google Cloud SDK?
+It is a command-line tool used to manage Google Cloud services.
+
+4. What is Flask?
+Flask is a lightweight Python web framework.
+
+5. What is app.yaml?
+Configuration file for App Engine application.
+
+6. Why is billing required?
+Billing verification is required to use Google Cloud services.
+
+7. What is deployment?
+Uploading application to cloud server.
+
+8. What is runtime?
+Runtime specifies programming language environment.
+
+9. What is gunicorn?
+Gunicorn is a Python web server used to run Flask apps.
+
+10. What is gcloud?
+gcloud is the command-line interface for Google Cloud.
+
+11. What is appspot.com?
+Default domain provided by Google App Engine.
+
+12. Difference between EC2 and App Engine?
+EC2 is IaaS.
+App Engine is PaaS.
+
+13. Advantages of App Engine?
+Automatic scaling, easy deployment, managed infrastructure.
+
+14. What is cloud computing?
+Providing computing services over internet.
+
+15. What is a web framework?
+Software framework used to build web applications.
