@@ -1,0 +1,185 @@
+===============================PRACTICAL:Create a Responsive College Dashboard using HTML, CSS and BootstrapRun the webpage on Ubuntu 22.04 Virtual Machine using Vagrant===============================
+--------------------------------------------------STEP 1: INSTALL REQUIRED SOFTWARE ON WINDOWS--------------------------------------------------
+1. Install VirtualBoxhttps://www.virtualbox.org/
+2. Install Vagranthttps://developer.hashicorp.com/vagrant/downloads
+3. Restart computer after installation
+--------------------------------------------------STEP 2: CREATE PROJECT FOLDER--------------------------------------------------
+Open Command Prompt:
+cd Desktopmkdir CollegeDashboardcd CollegeDashboard
+--------------------------------------------------STEP 3: CREATE VAGRANT FILE--------------------------------------------------
+Type:
+vagrant init ubuntu/jammy64
+This creates a Vagrantfile.
+--------------------------------------------------STEP 4: START UBUNTU VIRTUAL MACHINE--------------------------------------------------
+Type:
+vagrant up
+Wait for Ubuntu VM to download and start.
+--------------------------------------------------STEP 5: LOGIN INTO UBUNTU VM--------------------------------------------------
+Type:
+vagrant ssh
+Now you are inside Ubuntu Linux terminal.
+--------------------------------------------------STEP 6: INSTALL APACHE WEB SERVER--------------------------------------------------
+Inside Ubuntu VM type:
+sudo apt updatesudo apt install apache2 -y
+Start apache server:
+sudo systemctl start apache2
+Enable apache:
+sudo systemctl enable apache2
+Check status:
+sudo systemctl status apache2
+Press Q to exit status screen.
+--------------------------------------------------STEP 7: GO TO WEB SERVER DIRECTORY--------------------------------------------------
+Type:
+cd /var/www/html
+Check files:
+ls
+You will see index.html
+--------------------------------------------------STEP 8: REMOVE DEFAULT PAGE--------------------------------------------------
+Type:
+sudo rm index.html
+--------------------------------------------------STEP 9: CREATE NEW WEBPAGE--------------------------------------------------
+Type:
+sudo nano index.html
+Paste the COMPLETE CODE below.
+--------------------------------------------------STEP 10: COMPLETE HTML + CSS + BOOTSTRAP CODE--------------------------------------------------
+<!DOCTYPE html><html lang="en">
+<head>  <meta charset="UTF-8">  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I2IT Student Dashboard</title>
+  <!-- Bootstrap CSS -->  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    *{      margin:0;      padding:0;      box-sizing:border-box;      font-family:Arial, sans-serif;    }
+    body{      background:#eef0f3;    }
+    /* Navbar */
+    .navbar-custom{      height:70px;      background:#16202d;      color:white;      display:flex;      justify-content:space-between;      align-items:center;      padding:0 25px;    }
+    .navbar-custom h2{      font-size:24px;      font-weight:600;    }
+    .dashboard-text{      font-size:22px;      font-weight:500;    }
+    /* Layout */
+    .main-layout{      display:flex;      min-height:calc(100vh - 70px);    }
+    /* Sidebar */
+    .sidebar{      width:230px;      background:#f8f9fa;      border-right:1px solid #ddd;      padding-top:20px;    }
+    .sidebar ul{      list-style:none;      padding-left:0;    }
+    .sidebar ul li{      padding:18px 25px;      font-size:18px;      transition:0.3s;      cursor:pointer;    }
+    .sidebar ul li:hover{      background:#e9ecef;    }
+    .sidebar ul li.active{      background:#dee2e6;      font-weight:bold;    }
+    .logout{      color:red;      font-weight:bold;    }
+    /* Main Content */
+    .content{      flex:1;      padding:35px;    }
+    .content h1{      font-size:46px;      margin-bottom:30px;    }
+    /* Cards */
+    .card-box{      border-radius:20px;      padding:28px;      background:white;      position:relative;      box-shadow:0 2px 10px rgba(0,0,0,0.08);      overflow:hidden;    }
+    .card-box::before{      content:"";      position:absolute;      left:0;      top:0;      width:6px;      height:100%;    }
+    .blue::before{      background:#4f46e5;    }
+    .green::before{      background:#10b981;    }
+    .orange::before{      background:#f97316;    }
+    .red::before{      background:#ef4444;    }
+    .card-box h3{      color:#666;      font-size:22px;      margin-bottom:15px;    }
+    .card-box p{      font-size:50px;      font-weight:bold;    }
+    /* Table */
+    .table-section{      margin-top:40px;      background:white;      border-radius:20px;      padding:30px;      box-shadow:0 2px 10px rgba(0,0,0,0.08);    }
+    .table-section h2{      margin-bottom:25px;      font-size:34px;    }
+    table{      overflow:hidden;      border-radius:10px;    }
+    /* Responsive */
+    @media(max-width:900px){
+      .main-layout{        flex-direction:column;      }
+      .sidebar{        width:100%;      }
+      .content h1{        font-size:32px;      }
+    }
+  </style></head>
+<body>
+  <!-- Navbar -->
+  <div class="navbar-custom">
+    <h2>International Institute of Information Technology (I2IT)</h2>
+    <div class="dashboard-text">      Student Dashboard    </div>
+  </div>
+  <!-- Layout -->
+  <div class="main-layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul>        <li class="active">Overview</li>        <li>Students</li>        <li>Courses</li>        <li>Faculty</li>        <li>Attendance</li>        <li class="logout">Logout</li>      </ul>
+    </div>
+    <!-- Content -->
+    <div class="content">
+      <h1>Dashboard Overview</h1>
+      <!-- Statistics Cards -->
+      <div class="container-fluid">
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-3">            <div class="card-box blue">              <h3>Total Students</h3>              <p>986</p>            </div>          </div>
+          <div class="col-md-6 col-lg-3">            <div class="card-box green">              <h3>Courses Offered</h3>              <p>45</p>            </div>          </div>
+          <div class="col-md-6 col-lg-3">            <div class="card-box orange">              <h3>Faculty Members</h3>              <p>72</p>            </div>          </div>
+          <div class="col-md-6 col-lg-3">            <div class="card-box red">              <h3>Departments</h3>              <p>3</p>            </div>          </div>
+        </div>
+      </div>
+      <!-- Table -->
+      <div class="table-section">
+        <h2>IT Department</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover text-center">
+            <thead class="table-dark">
+              <tr>                <th>Roll No</th>                <th>Student Name</th>                <th>Class</th>                <th>Division</th>              </tr>
+            </thead>
+            <tbody>
+              <tr>                <td>TIA03</td>                <td>Anjali Gupta</td>                <td>TE IT</td>                <td>A</td>              </tr>
+              <tr>                <td>TIA12</td>                <td>Rahul Patil</td>                <td>TE IT</td>                <td>B</td>              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body></html>
+--------------------------------------------------STEP 11: SAVE FILE--------------------------------------------------
+Press:
+CTRL + X
+Then press:
+Y
+Then press:
+ENTER
+--------------------------------------------------STEP 12: FIND UBUNTU VM IP ADDRESS--------------------------------------------------
+Type:
+ip a
+OR
+hostname -I
+Example output:
+192.168.56.10
+--------------------------------------------------STEP 13: OPEN WEBSITE IN BROWSER--------------------------------------------------
+On Windows browser open:
+http://YOUR_IP_ADDRESS
+Example:
+http://192.168.56.10
+OR simply try:
+http://localhost:8080
+(if port forwarding is configured)
+--------------------------------------------------OPTIONAL PORT FORWARDING--------------------------------------------------
+Exit VM:
+exit
+Open Vagrantfile on Windows.
+Add this line below config.vm.box:
+config.vm.network "forwarded_port", guest: 80, host: 8080
+Save file.
+Restart VM:
+vagrant reload
+Now open:
+http://localhost:8080
+--------------------------------------------------OUTPUT--------------------------------------------------
+You will see:
+1. Professional I2IT Dashboard2. Responsive sidebar3. Bootstrap cards4. Student statistics5. IT department table6. Fully responsive webpage
+--------------------------------------------------IMPORTANT CONCEPTS--------------------------------------------------
+HTML:Used to create webpage structure.
+CSS:Used for styling webpage.
+Bootstrap:Frontend framework for responsive design.
+Responsive Webpage:Adjusts automatically on mobile, tablet and desktop.
+Apache:Web server that hosts webpage on Ubuntu VM.
+Vagrant:Tool used to create and manage virtual machines.
+VirtualBox:Software that runs Ubuntu virtual machine.
+--------------------------------------------------VIVA QUESTIONS WITH ANSWERS--------------------------------------------------
+1. What is Bootstrap?Bootstrap is a CSS framework used to create responsive websites quickly.
+2. What is responsive design?Responsive design automatically adjusts webpage layout for different screen sizes.
+3. What is Vagrant?Vagrant is a tool used to create and manage virtual machines easily.
+4. What is Apache server?Apache is a web server used to host websites.
+5. Why do we use CSS?CSS is used to style HTML elements.
+6. What is a sidebar?Sidebar is a vertical navigation menu placed on left or right side.
+7. What is a card in Bootstrap?A card is a flexible content container used to display statistics or information.
+8. What is the use of media queries?Media queries make webpage responsive for different devices.
+9. What is the purpose of table-responsive class?It makes tables scrollable on smaller screens.
+10. Difference between HTML and CSS?HTML creates structure.CSS adds design and styling.
+--------------------------------------------------END OF PRACTICAL--------------------------------------------------
