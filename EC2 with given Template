@@ -1,0 +1,114 @@
+# ================================
+# EC2 + APACHE + ECOMMERCE WEBSITE DEPLOYMENT
+# SPPU TE IT LP-2 (CC + WAD)
+# ================================
+
+
+# ---------- WINDOWS POWERSHELL / CMD ----------
+
+# Go to folder containing:
+# 1. mykey.pem
+# 2. gardeningwebsitetemplate.zip
+
+cd Downloads
+
+# Check files
+dir
+
+# Upload ZIP file from Windows to EC2
+scp -i mykey.pem gardeningwebsitetemplate.zip ubuntu@PUBLIC-IP:/home/ubuntu/
+
+# Connect to EC2 Ubuntu Server
+ssh -i mykey.pem ubuntu@PUBLIC-IP
+
+
+
+# ---------- UBUNTU EC2 COMMANDS ----------
+
+# Update packages
+sudo apt update
+
+# Install Apache Web Server
+sudo apt install apache2 -y
+
+# Start Apache
+sudo systemctl start apache2
+
+# Enable Apache on boot
+sudo systemctl enable apache2
+
+# Check Apache status
+sudo systemctl status apache2
+
+# Install unzip utility
+sudo apt install unzip -y
+
+# Check uploaded ZIP file
+ls
+
+# Extract ecommerce template
+unzip gardeningwebsitetemplate.zip
+
+# Copy website files to Apache directory
+sudo cp -r gardeningwebsitetemplate/* /var/www/html/
+
+# Restart Apache
+sudo systemctl restart apache2
+
+# Open Apache web directory
+cd /var/www/html
+
+# List deployed website files
+ls
+
+1. What is EC2?
+
+EC2 is a virtual server provided by AWS used to run applications in the cloud.
+
+2. What is Apache?
+
+Apache is a web server software used to host websites on a server.
+
+3. Why do we use Apache in this experiment?
+
+To host and serve web pages over HTTP protocol.
+
+4. What is SCP command?
+
+SCP is used to securely transfer files from local system to remote server.
+
+5. What is SSH?
+
+SSH is a secure protocol used to connect to remote servers.
+
+6. What is Security Group?
+
+It is a virtual firewall that controls inbound and outbound traffic of EC2.
+
+7. Why do we use port 80?
+
+Port 80 is the default port for HTTP web traffic.
+
+8. What is unzip command used for?
+
+It is used to extract compressed ZIP files.
+
+9. What is /var/www/html?
+
+It is the default directory where Apache stores website files.
+
+10. Why do we restart Apache?
+
+To apply changes made in website files.
+
+11. What is t2.micro instance?
+
+A free-tier EC2 instance used for learning and basic applications.
+
+12. What happens after copying files to /var/www/html?
+
+The website becomes live and accessible via browser using public IP.
+
+13. What is AWS?
+
+AWS is Amazon Web Services providing cloud computing services like servers, storage, and databases.
