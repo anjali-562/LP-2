@@ -1,0 +1,307 @@
+# ================================
+# PRACTICAL:
+# Create GitHub Account, Create Repository,
+# Create Application and Push Code Using Git Commands
+# ================================
+
+# ------------------------------------------------
+# STEP 1: CHECK GIT INSTALLATION
+# ------------------------------------------------
+
+git --version
+
+# If git is not installed:
+sudo apt update
+sudo apt install git -y
+
+# Check again
+git --version
+
+
+# ------------------------------------------------
+# STEP 2: CONFIGURE GIT USERNAME & EMAIL
+# (Run only first time)
+# ------------------------------------------------
+
+git config --global user.name "Your Name"
+
+git config --global user.email "yourgmail@gmail.com"
+
+# Check configuration
+git config --list
+
+
+# ------------------------------------------------
+# STEP 3: CREATE PROJECT FOLDER
+# ------------------------------------------------
+
+mkdir GitHub_Practical
+
+cd GitHub_Practical
+
+
+# ------------------------------------------------
+# STEP 4: CREATE SIMPLE APPLICATION
+# ------------------------------------------------
+
+nano index.html
+
+
+# ------------------------------------------------
+# PASTE THIS CODE INSIDE index.html
+# ------------------------------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Practical</title>
+
+    <style>
+
+        body{
+            font-family: Arial;
+            background:#f2f2f2;
+            text-align:center;
+            padding-top:100px;
+        }
+
+        .box{
+            background:white;
+            width:400px;
+            margin:auto;
+            padding:40px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        h1{
+            color:#0d6efd;
+        }
+
+        p{
+            font-size:20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="box">
+
+        <h1>I2IT Pune</h1>
+
+        <p>GitHub Version Control Practical</p>
+
+        <p>Successfully Uploaded Project to GitHub</p>
+
+    </div>
+
+</body>
+</html>
+
+
+# ------------------------------------------------
+# SAVE FILE
+# ------------------------------------------------
+
+CTRL + O
+ENTER
+CTRL + X
+
+
+# ------------------------------------------------
+# STEP 5: OPEN FILE IN BROWSER
+# ------------------------------------------------
+
+firefox index.html
+
+
+# ------------------------------------------------
+# STEP 6: INITIALIZE GIT REPOSITORY
+# ------------------------------------------------
+
+git init
+
+
+# ------------------------------------------------
+# STEP 7: CHECK FILE STATUS
+# ------------------------------------------------
+
+git status
+
+
+# ------------------------------------------------
+# STEP 8: ADD FILES TO STAGING AREA
+# ------------------------------------------------
+
+git add .
+
+
+# ------------------------------------------------
+# STEP 9: COMMIT FILES
+# ------------------------------------------------
+
+git commit -m "Initial Commit"
+
+
+# ------------------------------------------------
+# STEP 10: CREATE REPOSITORY ON GITHUB
+# ------------------------------------------------
+
+# Open browser:
+# https://github.com
+
+# Login
+
+# Click:
+# New Repository
+
+# Repository Name:
+# GitHub_Practical
+
+# Click:
+# Create Repository
+
+
+# ------------------------------------------------
+# STEP 11: CONNECT LOCAL PROJECT TO GITHUB
+# ------------------------------------------------
+
+git remote add origin https://github.com/yourusername/GitHub_Practical.git
+
+
+# ------------------------------------------------
+# STEP 12: PUSH CODE TO GITHUB
+# ------------------------------------------------
+
+git branch -M main
+
+git push -u origin main
+
+
+# ------------------------------------------------
+# IF ASKING USERNAME/PASSWORD
+# ------------------------------------------------
+
+# Username:
+# Your GitHub username
+
+# Password:
+# Use Personal Access Token instead of password
+
+
+# ------------------------------------------------
+# STEP 13: VERIFY UPLOAD
+# ------------------------------------------------
+
+# Refresh GitHub repository page
+# Your index.html file will appear
+
+
+# ==========================================================
+# IMPORTANT GIT COMMANDS
+# ==========================================================
+
+# Check status
+git status
+
+# Add files
+git add .
+
+# Commit changes
+git commit -m "message"
+
+# Push changes
+git push
+
+# Pull latest code
+git pull
+
+# Clone repository
+git clone repository_link
+
+# View commit history
+git log
+
+
+# ==========================================================
+# VIVA QUESTIONS WITH ANSWERS
+# ==========================================================
+
+# 1. What is Git?
+# Git is a distributed version control system used to track code changes.
+
+# 2. What is GitHub?
+# GitHub is a cloud platform used to store and manage Git repositories online.
+
+# 3. What is version control?
+# Version control tracks changes in files and allows rollback to previous versions.
+
+# 4. Difference between Git and GitHub?
+# Git = tool
+# GitHub = online hosting platform for Git repositories
+
+# 5. What is repository?
+# Repository is a storage location containing project files and Git history.
+
+# 6. What does git init do?
+# Initializes a new local Git repository.
+
+# 7. What does git add do?
+# Adds files to staging area before commit.
+
+# 8. What does git commit do?
+# Saves snapshot of project changes.
+
+# 9. What does git push do?
+# Uploads local repository code to GitHub.
+
+# 10. What is staging area?
+# Temporary area where files are prepared before commit.
+
+# 11. What is branch?
+# Separate development line in Git.
+
+# 12. What is clone?
+# Copying remote repository to local system.
+
+# 13. What is pull?
+# Downloads latest changes from GitHub.
+
+# 14. What is commit message?
+# Short description explaining code changes.
+
+# 15. Why GitHub is used?
+# For collaboration, backup, version tracking and project hosting.
+
+
+# ==========================================================
+# THEORY
+# ==========================================================
+
+# Git:
+# Open-source version control software.
+
+# GitHub:
+# Online hosting service for Git repositories.
+
+# Workflow:
+# Working Directory -> Staging Area -> Commit -> GitHub Repository
+
+# Advantages:
+# 1. Tracks code history
+# 2. Easy collaboration
+# 3. Backup of code
+# 4. Multiple developers can work together
+# 5. Easy rollback
+
+
+# ==========================================================
+# OUTPUT
+# ==========================================================
+
+# A simple webpage is created.
+# Git repository initialized.
+# Code pushed successfully to GitHub repository.
