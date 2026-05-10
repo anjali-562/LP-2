@@ -1,0 +1,582 @@
+===============================
+ANGULAR USER AUTHENTICATION APP
+WITH GOOGLE CLOUD DEPLOYMENT
+(TE LP-2 PRACTICAL)
+===============================
+
+-----------------------------------
+STEP 1: INSTALL REQUIRED SOFTWARE
+-----------------------------------
+
+1. Install Node.js
+https://nodejs.org
+
+2. Install Angular CLI
+Open Command Prompt / PowerShell:
+
+npm install -g @angular/cli
+
+3. Verify Installation
+
+node -v
+npm -v
+ng version
+
+-----------------------------------
+STEP 2: CREATE PROJECT
+-----------------------------------
+
+cd Downloads
+
+ng new user-app
+
+# Select:
+# Routing -> Yes
+# Stylesheet -> CSS
+# SSR/SSG -> No
+
+cd user-app
+
+-----------------------------------
+STEP 3: CREATE COMPONENTS
+-----------------------------------
+
+ng g c register
+ng g c login
+ng g c profile
+
+-----------------------------------
+STEP 4: OPEN PROJECT IN VS CODE
+-----------------------------------
+
+code .
+
+-----------------------------------
+STEP 5: REPLACE FILES WITH BELOW CODE
+-----------------------------------
+
+
+====================================================
+FILE: src/app/app.routes.ts
+====================================================
+
+import { Routes } from '@angular/router';
+import { Register } from './register/register';
+import { Login } from './login/login';
+import { Profile } from './profile/profile';
+
+export const routes: Routes = [
+  { path: 'register', component: Register },
+  { path: 'login', component: Login },
+  { path: 'profile', component: Profile },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
+];
+
+
+====================================================
+FILE: src/app/app.ts
+====================================================
+
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet],
+  templateUrl: './app.html',
+  styleUrl: './app.css'
+})
+export class App {
+}
+
+
+====================================================
+FILE: src/app/app.html
+====================================================
+
+<h1>I2IT User Authentication Portal</h1>
+
+<nav>
+  <a routerLink="/register">Register</a>
+  <a routerLink="/login">Login</a>
+  <a routerLink="/profile">Profile</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+
+====================================================
+FILE: src/app/register/register.ts
+====================================================
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-register',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './register.html',
+  styleUrl: './register.css'
+})
+export class Register {
+
+  name = '';
+  email = '';
+  password = '';
+
+  constructor(private router: Router) {}
+
+  registerUser() {
+
+    const user = {
+      name: this.name,
+      email: this.email,
+      password: this.password
+    };
+
+    localStorage.setItem('user', JSON.stringify(user));
+
+    alert('Registration Successful');
+
+    this.router.navigate(['/login']);
+  }
+}
+
+
+====================================================
+FILE: src/app/register/register.html
+====================================================
+
+<div class="form-card">
+
+  <h2>Register User</h2>
+
+  <form (ngSubmit)="registerUser()">
+
+    <label>Name</label>
+    <input
+      type="text"
+      [(ngModel)]="name"
+      name="name"
+      placeholder="Enter Name"
+    >
+
+    <label>Email</label>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Enter Email"
+    >
+
+    <label>Password</label>
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Enter Password"
+    >
+
+    <button type="submit">Register</button>
+
+  </form>
+
+</div>
+
+
+====================================================
+FILE: src/app/login/login.ts
+====================================================
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './login.html',
+  styleUrl: './login.css'
+})
+export class Login {
+
+  email = '';
+  password = '';
+
+  constructor(private router: Router) {}
+
+  loginUser() {
+
+    const storedUser = JSON.parse(
+      localStorage.getItem('user') || '{}'
+    );
+
+    if (
+      this.email === storedUser.email &&
+      this.password === storedUser.password
+    ) {
+
+      alert('Login Successful');
+
+      this.router.navigate(['/profile']);
+
+    } else {
+
+      alert('Invalid Email or Password');
+
+    }
+  }
+}
+
+
+====================================================
+FILE: src/app/login/login.html
+====================================================
+
+<div class="form-card">
+
+  <h2>Login User</h2>
+
+  <form (ngSubmit)="loginUser()">
+
+    <label>Email</label>
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Enter Email"
+    >
+
+    <label>Password</label>
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Enter Password"
+    >
+
+    <button type="submit">Login</button>
+
+  </form>
+
+</div>
+
+
+====================================================
+FILE: src/app/profile/profile.ts
+====================================================
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-profile',
+  standalone: true,
+  imports: [],
+  templateUrl: './profile.html',
+  styleUrl: './profile.css'
+})
+export class Profile implements OnInit {
+
+  user: any = {};
+
+  ngOnInit(): void {
+
+    if (typeof window !== 'undefined') {
+
+      const storedUser = localStorage.getItem('user');
+
+      if (storedUser) {
+        this.user = JSON.parse(storedUser);
+      }
+
+    }
+  }
+}
+
+
+====================================================
+FILE: src/app/profile/profile.html
+====================================================
+
+<div class="profile-card">
+
+  <h2>User Profile</h2>
+
+  <p>
+    <strong>Name:</strong>
+    {{ user.name }}
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    {{ user.email }}
+  </p>
+
+</div>
+
+
+====================================================
+FILE: src/styles.css
+====================================================
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Segoe UI',sans-serif;
+  min-height:100vh;
+  background:linear-gradient(135deg,#ff758c,#6a11cb);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:40px;
+}
+
+app-root{
+  width:100%;
+}
+
+h1{
+  text-align:center;
+  color:white;
+  margin-bottom:25px;
+  font-size:48px;
+  font-weight:bold;
+  letter-spacing:2px;
+}
+
+nav{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+nav a{
+  text-decoration:none;
+  color:white;
+  margin:0 15px;
+  font-size:20px;
+  font-weight:bold;
+  padding:10px 18px;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+nav a:hover{
+  background:rgba(255,255,255,0.2);
+}
+
+.form-card,
+.profile-card{
+  width:500px;
+  margin:auto;
+  padding:35px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(10px);
+  box-shadow:0 8px 30px rgba(0,0,0,0.2);
+}
+
+h2{
+  text-align:center;
+  color:white;
+  margin-bottom:25px;
+  font-size:32px;
+}
+
+label{
+  color:white;
+  font-weight:bold;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-top:8px;
+  margin-bottom:18px;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#ffffff;
+  color:#6a11cb;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.03);
+}
+
+p{
+  color:white;
+  font-size:20px;
+  margin:15px 0;
+}
+
+
+-----------------------------------
+STEP 6: RUN PROJECT
+-----------------------------------
+
+ng serve
+
+Open browser:
+
+http://localhost:4200
+
+
+=========================================
+GOOGLE CLOUD DEPLOYMENT
+=========================================
+
+-----------------------------------
+STEP 7: CREATE ZIP FILE
+-----------------------------------
+
+1. Go to project folder
+2. Right click user-app folder
+3. Send To -> Compressed ZIP Folder
+
+-----------------------------------
+STEP 8: OPEN GOOGLE CLOUD
+-----------------------------------
+
+https://console.cloud.google.com
+
+1. Sign in
+2. Create New Project
+
+Example:
+user-auth-practical
+
+-----------------------------------
+STEP 9: OPEN CLOUD SHELL
+-----------------------------------
+
+Top-right corner terminal icon
+(Activate Cloud Shell)
+
+-----------------------------------
+STEP 10: UPLOAD ZIP FILE
+-----------------------------------
+
+Inside Cloud Shell:
+Click 3 dots -> Upload File
+
+Upload:
+user-app.zip
+
+-----------------------------------
+STEP 11: UNZIP PROJECT
+-----------------------------------
+
+unzip user-app.zip
+
+cd user-app
+
+-----------------------------------
+STEP 12: INSTALL DEPENDENCIES
+-----------------------------------
+
+npm install
+
+-----------------------------------
+STEP 13: BUILD ANGULAR PROJECT
+-----------------------------------
+
+ng build
+
+-----------------------------------
+STEP 14: CREATE app.yaml
+-----------------------------------
+
+nano app.yaml
+
+Paste:
+
+runtime: nodejs22
+
+handlers:
+  - url: /(.*\..+)$
+    static_files: dist/user-app/browser/\1
+    upload: dist/user-app/browser/(.*\..+)$
+
+  - url: /.*
+    static_files: dist/user-app/browser/index.html
+    upload: dist/user-app/browser/index.html
+
+SAVE:
+CTRL + O
+ENTER
+
+EXIT:
+CTRL + X
+
+-----------------------------------
+STEP 15: DEPLOY PROJECT
+-----------------------------------
+
+gcloud app create
+
+# choose region
+
+gcloud app deploy
+
+Type:
+Y
+
+Wait for deployment.
+
+-----------------------------------
+STEP 16: OPEN WEBSITE
+-----------------------------------
+
+gcloud app browse
+
+OR open:
+
+https://YOUR-PROJECT-ID.el.r.appspot.com
+
+=========================================
+OUTPUT
+=========================================
+
+✔ Register Page
+✔ Login Page
+✔ Profile Page
+✔ Routing
+✔ Stylish UI
+✔ Local Storage
+✔ Google Cloud Deployment
+✔ Angular Application Working Successfully
+
+
+If rollup error comes:
+
+rm -rf node_modules
+
+rm package-lock.json
+
+npm install
+
+BUILD ANGULAR PROJECT
+
+ng build
+
+15) FIX index.html ISSUE
+cp dist/user-app/browser/index.csr.html dist/user-app/browser/index.html
