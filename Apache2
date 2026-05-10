@@ -1,0 +1,145 @@
+# ==========================================
+# EC2 INSTANCE + APACHE HOSTING
+# SPPU TE IT LP-2 CLOUD COMPUTING PRACTICAL
+# ==========================================
+
+
+# ==========================================
+# PART 1 : AWS EC2 INSTANCE CREATION
+# ==========================================
+
+STEP 1:
+Open AWS Console:
+https://aws.amazon.com/console/
+
+STEP 2:
+Search: EC2
+
+STEP 3:
+Click: Launch Instance
+
+STEP 4: CONFIGURATION
+
+Name:
+apache-server
+
+AMI:
+Ubuntu Server 22.04 LTS
+
+Instance Type:
+t2.micro
+
+Key Pair:
+Create and download mykey.pem
+
+Security Group:
+Allow:
+SSH -> Port 22
+HTTP -> Port 80
+
+STEP 5:
+Click Launch Instance
+
+STEP 6:
+Copy Public IP
+
+
+
+# ==========================================
+# PART 2 : WINDOWS CONNECTION (CMD / POWERSHELL)
+# ==========================================
+
+cd Downloads
+dir
+
+ssh -i mykey.pem ubuntu@<PUBLIC-IP>
+
+
+
+# ==========================================
+# PART 3 : UBUNTU SERVER SETUP
+# ==========================================
+
+sudo apt update
+
+# Install Apache Web Server
+sudo apt install apache2 -y
+
+# Start Apache
+sudo systemctl start apache2
+
+# Enable Apache on boot
+sudo systemctl enable apache2
+
+# Check status
+sudo systemctl status apache2
+
+
+
+# ==========================================
+# PART 4 : HOST WEBSITE
+# ==========================================
+
+cd /var/www/html
+
+sudo nano index.html
+
+PASTE YOUR HTML CODE (E-COMMERCE WEBSITE)
+
+
+
+# Restart Apache
+sudo systemctl restart apache2
+
+
+
+# ==========================================
+# PART 5 : OPEN WEBSITE
+# ==========================================
+
+Open Browser:
+
+http://<PUBLIC-IP>
+
+
+
+# ==========================================
+# VIVA QUESTIONS WITH ANSWERS
+# ==========================================
+
+1. What is EC2?
+EC2 is a virtual server provided by AWS used to run applications in the cloud.
+
+2. What is Apache?
+Apache is a web server software used to host websites.
+
+3. What is Security Group?
+It is a virtual firewall that controls traffic to EC2.
+
+4. Why port 80?
+It is default HTTP port for websites.
+
+5. What is SSH?
+Secure protocol to connect remote server securely.
+
+6. What is t2.micro?
+Free-tier EC2 instance used for learning.
+
+7. What is /var/www/html?
+Default Apache website directory.
+
+8. Why restart Apache?
+To apply changes made in website files.
+
+9. Difference between start and enable?
+start → runs now
+enable → runs on boot
+
+10. What is AWS?
+Cloud platform providing computing services.
+
+11. What is public IP?
+IP used to access server from internet.
+
+12. Why Apache enable?
+So service starts automatically on reboot.
