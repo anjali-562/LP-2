@@ -1,0 +1,199 @@
+# ============================================
+# FILE TRANSFER FROM VAGRANT VM TO AWS EC2
+# SPPU TE IT LP-2 CLOUD COMPUTING PRACTICAL
+# ============================================
+
+
+# ============================================
+# WINDOWS COMMANDS
+# ============================================
+
+# Create Vagrant Project Folder
+mkdir transfer-vagrant
+
+# Go inside folder
+cd transfer-vagrant
+
+# Initialize Ubuntu Vagrant VM
+vagrant init ubuntu/jammy64
+
+# Start Vagrant VM
+vagrant up
+
+# Login into Vagrant VM
+vagrant ssh
+
+
+
+# ============================================
+# VAGRANT UBUNTU VM COMMANDS
+# ============================================
+
+# Go to shared folder
+cd /vagrant
+
+# Create file
+nano demo.txt
+
+# Check files
+ls
+
+# Copy PEM key from shared folder to Linux home
+cp /vagrant/mykey.pem ~/
+
+# Go to home directory
+cd ~
+
+# Secure PEM permissions
+chmod 400 mykey.pem
+
+# Verify permissions
+ls -l mykey.pem
+
+# Connect to AWS EC2 using SSH
+ssh -i mykey.pem ubuntu@52.62.139.221
+
+# Exit EC2
+exit
+
+# Transfer file from Vagrant VM to AWS EC2
+scp -i ~/mykey.pem /vagrant/demo.txt ubuntu@52.62.139.221:/home/ubuntu/
+
+# Connect again to EC2
+ssh -i mykey.pem ubuntu@52.62.139.221
+
+# Verify transferred file
+ls
+
+# Open transferred file
+cat demo.txt
+
+
+# ============================================
+# OUTPUT
+# ============================================
+
+# File demo.txt successfully transferred from
+# Vagrant Ubuntu VM to AWS EC2 Instance.
+
+# Verified using:
+ls
+
+# Opened file using:
+cat demo.txt
+
+
+# ============================================
+# IMPORTANT CONCEPTS
+# ============================================
+
+Vagrant:
+Tool used to create and manage local virtual machines.
+
+AWS EC2:
+Elastic Compute Cloud service provided by AWS for creating cloud virtual machines.
+
+SSH:
+Secure Shell protocol used for remote login between systems.
+
+SCP:
+Secure Copy Protocol used for secure file transfer between systems.
+
+PEM File:
+Private key file used for authentication while connecting to EC2 instance.
+
+chmod 400:
+Gives read permission only to owner for security of PEM key.
+
+Shared Folder (/vagrant):
+Folder shared between Windows host machine and Ubuntu Vagrant VM.
+
+
+# ============================================
+# VIVA QUESTIONS WITH ANSWERS
+# ============================================
+
+1. What is Vagrant?
+Vagrant is a tool used to create and manage virtual machines easily.
+
+------------------------------------------------------------
+
+2. What is AWS EC2?
+AWS EC2 is a cloud service used to create virtual servers on AWS cloud.
+
+------------------------------------------------------------
+
+3. What is SSH?
+SSH stands for Secure Shell.
+It is used for secure remote login.
+
+------------------------------------------------------------
+
+4. What is SCP?
+SCP stands for Secure Copy Protocol.
+It is used for secure file transfer between systems.
+
+------------------------------------------------------------
+
+5. What is PEM file?
+PEM file is a private key file used to securely connect to AWS EC2 instance.
+
+------------------------------------------------------------
+
+6. Why is chmod 400 used?
+chmod 400 gives only read permission to owner.
+AWS requires secure permissions for PEM files.
+
+------------------------------------------------------------
+
+7. What is the purpose of /vagrant folder?
+/vagrant is a shared folder between host Windows machine and Ubuntu VM.
+
+------------------------------------------------------------
+
+8. Difference between Vagrant VM and EC2 instance?
+
+Vagrant VM:
+- Runs locally
+- Uses VirtualBox
+- Created using Vagrant
+
+EC2 Instance:
+- Runs on AWS cloud
+- Accessible through internet
+- Created using AWS
+
+------------------------------------------------------------
+
+9. What is the use of ls command?
+ls command is used to list files and directories.
+
+------------------------------------------------------------
+
+10. What is the use of cat command?
+cat command is used to display file contents.
+
+------------------------------------------------------------
+
+11. What is the use of nano editor?
+nano is a terminal-based text editor used to create/edit files.
+
+------------------------------------------------------------
+
+12. Why is SCP considered secure?
+Because SCP transfers files using encrypted SSH connection.
+
+------------------------------------------------------------
+
+13. What is virtualization?
+Virtualization means creating virtual versions of computers or servers.
+
+------------------------------------------------------------
+
+14. What is a virtual machine?
+A virtual machine is a software-based computer system.
+
+------------------------------------------------------------
+
+15. What is cloud computing?
+Cloud computing means delivering computing services over internet.
